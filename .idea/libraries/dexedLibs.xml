@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="dexedLibs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/H2OBot/bin/dexedLibs/android-support-v4-8e438fd7f4c16c452aaf090f811db938.jar!/" />
+      <root url="jar://$PROJECT_DIR$/H2OBot/bin/dexedLibs/joystickview-4c6c089b7536a4066a25afbbd8378e0f.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

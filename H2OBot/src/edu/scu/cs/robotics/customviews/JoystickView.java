@@ -204,6 +204,14 @@ public class JoystickView extends View implements Runnable {
 		}
 	}
 
+    private int getAngleRounded(){
+        int angle = getAngle();
+        if (angle<0){
+            angle = (360+angle);
+        }
+        return angle;
+    }
+
 	private int getPower() {
 		return (int) (100 * Math.sqrt((xPosition - centerX)
 				* (xPosition - centerX) + (yPosition - centerY)
@@ -248,7 +256,7 @@ public class JoystickView extends View implements Runnable {
 		while (!Thread.interrupted()) {
 			post(new Runnable() {
 				public void run() {
-					onJoystickMoveListener.onValueChanged(getAngle(),
+					onJoystickMoveListener.onValueChanged(getAngleRounded(),
 							getPower(), getDirection());
 				}
 			});

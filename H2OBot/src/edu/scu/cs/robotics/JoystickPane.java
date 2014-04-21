@@ -1,11 +1,11 @@
 package edu.scu.cs.robotics;
 
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import edu.scu.cs.robotics.customviews.JoystickView;
 import edu.scu.cs.robotics.customviews.JoystickView.OnJoystickMoveListener;
+import edu.scu.cs.robotics.communication.JoystickReading;
+import edu.scu.cs.robotics.communication.JoysticksInput;
 
 public class JoystickPane {
 
@@ -29,9 +29,14 @@ public class JoystickPane {
 		leftJoystickContainer =(FrameLayout) mActivity
 				.findViewById(R.id.left_joystick_container); 
 		rightJoystickContainer =(FrameLayout) mActivity
-				.findViewById(R.id.right_joystick_container); 
-		
-		
+				.findViewById(R.id.right_joystick_container);
+
+        final JoysticksInput inputReadings = JoysticksInput.getInstance();
+
+		//Hooking the readings objects
+        final JoystickReading leftJoystickReading = inputReadings.getLeftJoystick();
+        final JoystickReading rightJoystickReading = inputReadings.getRightJoystick();
+
 		// Adding two joysticks
 		leftJoystick = new JoystickView(mActivity, null);
 	
@@ -39,47 +44,35 @@ public class JoystickPane {
 
 			@Override
 			public void onValueChanged(int angle, int power, int direction) {
-				// TODO Auto-generated method stub
-				System.out.println("LEFT JOYSTICK | Angle: "
-						+ String.valueOf(angle) + "°");
-				System.out.println("LEFT JOYSTICK | Power:"
-						+ String.valueOf(power) + "%");
+				// Capturing Left Joystick
+
+                leftJoystickReading.setValues(angle,power,direction);
 				switch (direction) {
 				case JoystickView.FRONT:
-					System.out.println("LEFT JOYSTICK | Dir: "
-							+ JoystickView.FRONT);
 					break;
 				case JoystickView.FRONT_RIGHT:
-					System.out.println("LEFT JOYSTICK | Dir: "
-							+ JoystickView.FRONT_RIGHT);
+
 					break;
 				case JoystickView.RIGHT:
-					System.out.println("LEFT JOYSTICK | Dir: "
-							+ JoystickView.RIGHT);
+
 					break;
 				case JoystickView.RIGHT_BOTTOM:
-					System.out.println("LEFT JOYSTICK | Dir: "
-							+ JoystickView.RIGHT_BOTTOM);
+
 					break;
 				case JoystickView.BOTTOM:
-					System.out.println("LEFT JOYSTICK | Dir: "
-							+ JoystickView.BOTTOM);
+
 					break;
 				case JoystickView.BOTTOM_LEFT:
-					System.out.println("LEFT JOYSTICK | Dir: "
-							+ JoystickView.BOTTOM_LEFT);
+
 					break;
 				case JoystickView.LEFT:
-					System.out.println("LEFT JOYSTICK | Dir: "
-							+ JoystickView.LEFT);
+
 					break;
 				case JoystickView.LEFT_FRONT:
-					System.out.println("LEFT JOYSTICK | Dir: "
-							+ JoystickView.LEFT_FRONT);
+
 					break;
 				default:
-					System.out.println("LEFT JOYSTICK | Dir: "
-							+ JoystickView.FRONT);
+
 				}
 			}
 		}, JoystickView.DEFAULT_LOOP_INTERVAL);
@@ -90,62 +83,65 @@ public class JoystickPane {
 	
 	rightJoystick.setOnJoystickMoveListener(new OnJoystickMoveListener() {
 
-		@Override
-		public void onValueChanged(int angle, int power, int direction) {
-			// TODO Auto-generated method stub
-			System.out.println("RIGHT JOYSTICK | Angle: "
-					+ String.valueOf(angle) + "°");
-			System.out.println("RIGHT JOYSTICK | Power:"
-					+ String.valueOf(power) + "%");
-			switch (direction) {
-			case JoystickView.FRONT:
-				System.out.println("RIGHT JOYSTICK | Dir: "
-						+ JoystickView.FRONT);
-				break;
-			case JoystickView.FRONT_RIGHT:
-				System.out.println("RIGHT JOYSTICK | Dir: "
-						+ JoystickView.FRONT_RIGHT);
-				break;
-			case JoystickView.RIGHT:
-				System.out.println("RIGHT JOYSTICK | Dir: "
-						+ JoystickView.RIGHT);
-				break;
-			case JoystickView.RIGHT_BOTTOM:
-				System.out.println("RIGHT JOYSTICK | Dir: "
-						+ JoystickView.RIGHT_BOTTOM);
-				break;
-			case JoystickView.BOTTOM:
-				System.out.println("RIGHT JOYSTICK | Dir: "
-						+ JoystickView.BOTTOM);
-				break;
-			case JoystickView.BOTTOM_LEFT:
-				System.out.println("RIGHT JOYSTICK | Dir: "
-						+ JoystickView.BOTTOM_LEFT);
-				break;
-			case JoystickView.LEFT:
-				System.out.println("RIGHT JOYSTICK | Dir: "
-						+ JoystickView.LEFT);
-				break;
-			case JoystickView.LEFT_FRONT:
-				System.out.println("RIGHT JOYSTICK | Dir: "
-						+ JoystickView.LEFT_FRONT);
-				break;
-			default:
-				System.out.println("RIGHT JOYSTICK | Dir: "
-						+ JoystickView.FRONT);
-			}
-		}
-	}, JoystickView.DEFAULT_LOOP_INTERVAL);
+        @Override
+        public void onValueChanged(int angle, int power, int direction) {
+            // Capturing Left Joystick
+
+            rightJoystickReading.setValues(angle, power, direction);
+            switch (direction) {
+                case JoystickView.FRONT:
+                    break;
+                case JoystickView.FRONT_RIGHT:
+
+                    break;
+                case JoystickView.RIGHT:
+
+                    break;
+                case JoystickView.RIGHT_BOTTOM:
+
+                    break;
+                case JoystickView.BOTTOM:
+
+                    break;
+                case JoystickView.BOTTOM_LEFT:
+
+                    break;
+                case JoystickView.LEFT:
+
+                    break;
+                case JoystickView.LEFT_FRONT:
+
+                    break;
+                default:
+
+            }
+        }
+    }, JoystickView.DEFAULT_LOOP_INTERVAL);
 	
-	
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Readings " + inputReadings.getReadingsData());
+                }
+            }
+        }).start();
+
 	
 	leftJoystickContainer.addView(leftJoystick);
 	rightJoystickContainer.addView(rightJoystick);
 	
-	
-	RelativeLayout.LayoutParams leftLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT );
-	leftLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-	
+//
+//	RelativeLayout.LayoutParams leftLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT );
+//	leftLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+//
 
 	
 	
