@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">H2OBot</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="temperature">Temperature</string>
+    <string name="depth">Depth</string>
+    <string name="voltage">Voltage</string>
+    <string name="banks">Banks</string>
+    <string name="it">IT</string>
+    <string name="fun">Fun</string>
+
+    <array name="statistics">
+        <item>@string/temperature</item>
+        <item>@string/depth</item>
+        <item>@string/voltage</item>
+    </array>
+
+</resources>

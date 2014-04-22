@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/H2OBot/H2OBot.iml" filepath="$PROJECT_DIR$/H2OBot/H2OBot.iml" />
+      <module fileurl="file://$USER_HOME$/Desktop/Arduino/UsbSerialLibrary/USBSerialCommunication.iml" filepath="$USER_HOME$/Desktop/Arduino/UsbSerialLibrary/USBSerialCommunication.iml" />
     </modules>
   </component>
 </project>
